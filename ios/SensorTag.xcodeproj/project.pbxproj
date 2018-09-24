@@ -1153,6 +1153,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag33;
 				PRODUCT_NAME = SensorTag;
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1179,6 +1180,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag33;
 				PRODUCT_NAME = SensorTag;
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
