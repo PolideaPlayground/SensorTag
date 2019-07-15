@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from "react"
-import { connect as reduxConnect } from "react-redux"
+import React, { Component } from "react";
+import { connect as reduxConnect } from "react-redux";
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   Modal,
   StatusBar
-} from "react-native"
+} from "react-native";
 import {
   type ReduxState,
   clearLogs,
@@ -20,12 +20,12 @@ import {
   executeTest,
   forgetSensorTag,
   ConnectionState
-} from "./Reducer"
-import { Device } from "react-native-ble-plx"
-import { SensorTagTests, type SensorTagTestMetadata } from "./Tests"
+} from "./Reducer";
+import { Device } from "react-native-ble-plx";
+import { SensorTagTests, type SensorTagTestMetadata } from "./Tests";
 
 const Button = function(props) {
-  const { onPress, title, ...restProps } = props
+  const { onPress, title, ...restProps } = props;
   return (
     <TouchableOpacity onPress={onPress} {...restProps}>
       <Text
@@ -37,8 +37,8 @@ const Button = function(props) {
         {title}
       </Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 type Props = {
   sensorTag: ?Device,
@@ -50,54 +50,54 @@ type Props = {
   executeTest: typeof executeTest,
   currentTest: ?string,
   forgetSensorTag: typeof forgetSensorTag
-}
+};
 
 type State = {
   showModal: boolean
-}
+};
 
 class SensorTag extends Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       showModal: false
-    }
+    };
   }
 
   sensorTagStatus(): string {
     switch (this.props.connectionState) {
       case ConnectionState.CONNECTING:
-        return "Connecting..."
+        return "Connecting...";
       case ConnectionState.DISCOVERING:
-        return "Discovering..."
+        return "Discovering...";
       case ConnectionState.CONNECTED:
-        return "Connected"
+        return "Connected";
       case ConnectionState.DISCONNECTED:
       case ConnectionState.DISCONNECTING:
         if (this.props.sensorTag) {
-          return "Found " + this.props.sensorTag.id
+          return "Found " + this.props.sensorTag.id;
         }
     }
 
-    return "Searching..."
+    return "Searching...";
   }
 
   isSensorTagReadyToConnect(): boolean {
     return (
       this.props.sensorTag != null &&
-      this.props.connectionState == ConnectionState.DISCONNECTED
-    )
+      this.props.connectionState === ConnectionState.DISCONNECTED
+    );
   }
 
   isSensorTagReadyToDisconnect(): boolean {
-    return this.props.connectionState == ConnectionState.CONNECTED
+    return this.props.connectionState === ConnectionState.CONNECTED;
   }
 
   isSensorTagReadyToExecuteTests(): boolean {
     return (
-      this.props.connectionState == ConnectionState.CONNECTED &&
+      this.props.connectionState === ConnectionState.CONNECTED &&
       this.props.currentTest == null
-    )
+    );
   }
 
   renderHeader() {
@@ -112,7 +112,7 @@ class SensorTag extends Component<Props, State> {
             style={{ flex: 1 }}
             onPress={() => {
               if (this.props.sensorTag != null) {
-                this.props.connect(this.props.sensorTag)
+                this.props.connect(this.props.sensorTag);
               }
             }}
             title={"Connect"}
@@ -122,7 +122,7 @@ class SensorTag extends Component<Props, State> {
             disabled={!this.isSensorTagReadyToDisconnect()}
             style={{ flex: 1 }}
             onPress={() => {
-              this.props.disconnect()
+              this.props.disconnect();
             }}
             title={"Disconnect"}
           />
@@ -132,7 +132,7 @@ class SensorTag extends Component<Props, State> {
             disabled={!this.isSensorTagReadyToExecuteTests()}
             style={{ flex: 1 }}
             onPress={() => {
-              this.setState({ showModal: true })
+              this.setState({ showModal: true });
             }}
             title={"Execute test"}
           />
@@ -141,13 +141,13 @@ class SensorTag extends Component<Props, State> {
             style={{ flex: 1 }}
             disabled={this.props.sensorTag == null}
             onPress={() => {
-              this.props.forgetSensorTag()
+              this.props.forgetSensorTag();
             }}
             title={"Forget"}
           />
         </View>
       </View>
-    )
+    );
   }
 
   renderLogs() {
@@ -164,17 +164,17 @@ class SensorTag extends Component<Props, State> {
         <Button
           style={{ paddingTop: 10 }}
           onPress={() => {
-            this.props.clearLogs()
+            this.props.clearLogs();
           }}
           title={"Clear logs"}
         />
       </View>
-    )
+    );
   }
 
   renderModal() {
     // $FlowFixMe: SensorTagTests are keeping SensorTagTestMetadata as values.
-    const tests: Array<SensorTagTestMetadata> = Object.values(SensorTagTests)
+    const tests: Array<SensorTagTestMetadata> = Object.values(SensorTagTests);
 
     return (
       <Modal
@@ -218,8 +218,8 @@ class SensorTag extends Component<Props, State> {
                   style={{ paddingBottom: 5 }}
                   disabled={!this.isSensorTagReadyToExecuteTests()}
                   onPress={() => {
-                    this.props.executeTest(item.id)
-                    this.setState({ showModal: false })
+                    this.props.executeTest(item.id);
+                    this.setState({ showModal: false });
                   }}
                   title={item.title}
                 />
@@ -229,14 +229,14 @@ class SensorTag extends Component<Props, State> {
             <Button
               style={{ paddingTop: 5 }}
               onPress={() => {
-                this.setState({ showModal: false })
+                this.setState({ showModal: false });
               }}
               title={"Cancel"}
             />
           </View>
         </View>
       </Modal>
-    )
+    );
   }
 
   render() {
@@ -247,7 +247,7 @@ class SensorTag extends Component<Props, State> {
         {this.renderLogs()}
         {this.renderModal()}
       </SafeAreaView>
-    )
+    );
   }
 }
 
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#614245",
     color: "#919191"
   }
-})
+});
 
 export default reduxConnect(
   (state: ReduxState): $Shape<Props> => ({
@@ -294,4 +294,4 @@ export default reduxConnect(
     forgetSensorTag,
     executeTest
   }
-)(SensorTag)
+)(SensorTag);

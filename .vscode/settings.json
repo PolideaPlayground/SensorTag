@@ -1,5 +1,4 @@
 {
-    "prettier.arrowParens": "always",
-    "prettier.semi": false,
+    "javascript.validate.enable": false,
     "editor.formatOnSave": true
 }
