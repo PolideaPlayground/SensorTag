@@ -54,7 +54,7 @@ function* handleBleState(manager: BleManager): Generator<*, *, *> {
   }, buffers.expanding(1));
 
   try {
-    for (;;) {
+    for (; ;) {
       const newState = yield take(stateChannel);
       yield put(bleStateUpdated(newState));
     }
@@ -81,7 +81,7 @@ function* handleScanning(manager: BleManager): Generator<*, *, *> {
     "UPDATE_CONNECTION_STATE"
   ]);
 
-  for (;;) {
+  for (; ;) {
     const action:
       | BleStateUpdatedAction
       | UpdateConnectionStateAction = yield take(channel);
@@ -147,7 +147,7 @@ function* scan(manager: BleManager): Generator<*, *, *> {
           emit([error, scannedDevice]);
           return;
         }
-        if (scannedDevice != null && scannedDevice.localName === "SensorTag") {
+        if (scannedDevice != null) {
           emit([error, scannedDevice]);
         }
       }
@@ -158,11 +158,12 @@ function* scan(manager: BleManager): Generator<*, *, *> {
   }, buffers.expanding(1));
 
   try {
-    for (;;) {
-      const [error, scannedDevice]: [?BleError, ?Device] = yield take(
+    for (; ;) {
+      const [error, scannedDevice]: [?BleError,?Device] = yield take(
         scanningChannel
       );
       if (error != null) {
+        yield put(log(error.message))
       }
       if (scannedDevice != null) {
         yield put(sensorTagFound(scannedDevice));
@@ -180,7 +181,7 @@ function* scan(manager: BleManager): Generator<*, *, *> {
 function* handleConnection(manager: BleManager): Generator<*, *, *> {
   var testTask = null;
 
-  for (;;) {
+  for (; ;) {
     // Take action
     const { device }: ConnectAction = yield take("CONNECT");
 
@@ -205,7 +206,7 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
       yield call([device, device.discoverAllServicesAndCharacteristics]);
       yield put(updateConnectionState(ConnectionState.CONNECTED));
 
-      for (;;) {
+      for (; ;) {
         const { deviceAction, disconnected } = yield race({
           deviceAction: take(deviceActionChannel),
           disconnected: take(disconnectedChannel)
