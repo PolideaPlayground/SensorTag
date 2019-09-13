@@ -1,14 +1,14 @@
 module.exports = {
   root: true,
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   extends: [
-    "@react-native-community",
-    "plugin:prettier/recommended",
-    "plugin:flowtype/recommended"
+    '@react-native-community',
+    'plugin:prettier/recommended',
+    'plugin:flowtype/recommended',
   ],
-  plugins: ["flowtype"],
+  plugins: ['flowtype'],
   rules: {
-    "flowtype/space-after-type-colon": 0,
-    "react-native/no-inline-styles": 0
-  }
+    'flowtype/space-after-type-colon': 0,
+    'react-native/no-inline-styles': 0,
+  },
 };

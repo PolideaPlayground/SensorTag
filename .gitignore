@@ -39,7 +39,8 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
+# It's OK as this is only a demo app.
+# *.keystore
 
 # fastlane
 #

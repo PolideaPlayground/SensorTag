@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from "react";
-import { connect as reduxConnect } from "react-redux";
+import React, {Component} from 'react';
+import {connect as reduxConnect} from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -10,8 +10,8 @@ import {
   FlatList,
   TouchableOpacity,
   Modal,
-  StatusBar
-} from "react-native";
+  StatusBar,
+} from 'react-native';
 import {
   type ReduxState,
   clearLogs,
@@ -19,21 +19,20 @@ import {
   disconnect,
   executeTest,
   forgetSensorTag,
-  ConnectionState
-} from "./Reducer";
-import { Device } from "react-native-ble-plx";
-import { SensorTagTests, type SensorTagTestMetadata } from "./Tests";
+  ConnectionState,
+} from './Reducer';
+import {Device} from 'react-native-ble-plx';
+import {SensorTagTests, type SensorTagTestMetadata} from './Tests';
 
 const Button = function(props) {
-  const { onPress, title, ...restProps } = props;
+  const {onPress, title, ...restProps} = props;
   return (
     <TouchableOpacity onPress={onPress} {...restProps}>
       <Text
         style={[
           styles.buttonStyle,
-          restProps.disabled ? styles.disabledButtonStyle : null
-        ]}
-      >
+          restProps.disabled ? styles.disabledButtonStyle : null,
+        ]}>
         {title}
       </Text>
     </TouchableOpacity>
@@ -49,37 +48,37 @@ type Props = {
   disconnect: typeof disconnect,
   executeTest: typeof executeTest,
   currentTest: ?string,
-  forgetSensorTag: typeof forgetSensorTag
+  forgetSensorTag: typeof forgetSensorTag,
 };
 
 type State = {
-  showModal: boolean
+  showModal: boolean,
 };
 
 class SensorTag extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
     };
   }
 
   sensorTagStatus(): string {
     switch (this.props.connectionState) {
       case ConnectionState.CONNECTING:
-        return "Connecting...";
+        return 'Connecting...';
       case ConnectionState.DISCOVERING:
-        return "Discovering...";
+        return 'Discovering...';
       case ConnectionState.CONNECTED:
-        return "Connected";
+        return 'Connected';
       case ConnectionState.DISCONNECTED:
       case ConnectionState.DISCONNECTING:
         if (this.props.sensorTag) {
-          return "Found " + this.props.sensorTag.id;
+          return 'Found ' + this.props.sensorTag.id;
         }
     }
 
-    return "Searching...";
+    return 'Searching...';
   }
 
   isSensorTagReadyToConnect(): boolean {
@@ -102,48 +101,48 @@ class SensorTag extends Component<Props, State> {
 
   renderHeader() {
     return (
-      <View style={{ padding: 10 }}>
+      <View style={{padding: 10}}>
         <Text style={styles.textStyle} numberOfLines={1}>
           SensorTag: {this.sensorTagStatus()}
         </Text>
-        <View style={{ flexDirection: "row", paddingTop: 5 }}>
+        <View style={{flexDirection: 'row', paddingTop: 5}}>
           <Button
             disabled={!this.isSensorTagReadyToConnect()}
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             onPress={() => {
               if (this.props.sensorTag != null) {
                 this.props.connect(this.props.sensorTag);
               }
             }}
-            title={"Connect"}
+            title={'Connect'}
           />
-          <View style={{ width: 5 }} />
+          <View style={{width: 5}} />
           <Button
             disabled={!this.isSensorTagReadyToDisconnect()}
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             onPress={() => {
               this.props.disconnect();
             }}
-            title={"Disconnect"}
+            title={'Disconnect'}
           />
         </View>
-        <View style={{ flexDirection: "row", paddingTop: 5 }}>
+        <View style={{flexDirection: 'row', paddingTop: 5}}>
           <Button
             disabled={!this.isSensorTagReadyToExecuteTests()}
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             onPress={() => {
-              this.setState({ showModal: true });
+              this.setState({showModal: true});
             }}
-            title={"Execute test"}
+            title={'Execute test'}
           />
-          <View style={{ width: 5 }} />
+          <View style={{width: 5}} />
           <Button
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             disabled={this.props.sensorTag == null}
             onPress={() => {
               this.props.forgetSensorTag();
             }}
-            title={"Forget"}
+            title={'Forget'}
           />
         </View>
       </View>
@@ -152,21 +151,21 @@ class SensorTag extends Component<Props, State> {
 
   renderLogs() {
     return (
-      <View style={{ flex: 1, padding: 10, paddingTop: 0 }}>
+      <View style={{flex: 1, padding: 10, paddingTop: 0}}>
         <FlatList
-          style={{ flex: 1 }}
+          style={{flex: 1}}
           data={this.props.logs}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <Text style={styles.logTextStyle}> {item} </Text>
           )}
           keyExtractor={(item, index) => index.toString()}
         />
         <Button
-          style={{ paddingTop: 10 }}
+          style={{paddingTop: 10}}
           onPress={() => {
             this.props.clearLogs();
           }}
-          title={"Clear logs"}
+          title={'Clear logs'}
         />
       </View>
     );
@@ -181,45 +180,41 @@ class SensorTag extends Component<Props, State> {
         animationType="fade"
         transparent={true}
         visible={this.state.showModal}
-        onRequestClose={() => {}}
-      >
+        onRequestClose={() => {}}>
         <View
           style={{
-            backgroundColor: "#00000060",
+            backgroundColor: '#00000060',
             flex: 1,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <View
             style={{
-              backgroundColor: "#a92a35",
+              backgroundColor: '#a92a35',
               borderRadius: 10,
-              height: "50%",
+              height: '50%',
               padding: 5,
-              shadowColor: "black",
+              shadowColor: 'black',
               shadowRadius: 20,
               shadowOpacity: 0.9,
-              elevation: 20
-            }}
-          >
+              elevation: 20,
+            }}>
             <Text
               style={[
                 styles.textStyle,
-                { paddingBottom: 10, alignSelf: "center" }
-              ]}
-            >
+                {paddingBottom: 10, alignSelf: 'center'},
+              ]}>
               Select test to execute:
             </Text>
             <FlatList
               data={tests}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <Button
-                  style={{ paddingBottom: 5 }}
+                  style={{paddingBottom: 5}}
                   disabled={!this.isSensorTagReadyToExecuteTests()}
                   onPress={() => {
                     this.props.executeTest(item.id);
-                    this.setState({ showModal: false });
+                    this.setState({showModal: false});
                   }}
                   title={item.title}
                 />
@@ -227,11 +222,11 @@ class SensorTag extends Component<Props, State> {
               keyExtractor={(item, index) => index.toString()}
             />
             <Button
-              style={{ paddingTop: 5 }}
+              style={{paddingTop: 5}}
               onPress={() => {
-                this.setState({ showModal: false });
+                this.setState({showModal: false});
               }}
-              title={"Cancel"}
+              title={'Cancel'}
             />
           </View>
         </View>
@@ -254,30 +249,30 @@ class SensorTag extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#a92a35",
-    padding: 5
+    backgroundColor: '#a92a35',
+    padding: 5,
   },
   textStyle: {
-    color: "white",
-    fontSize: 20
+    color: 'white',
+    fontSize: 20,
   },
   logTextStyle: {
-    color: "white",
-    fontSize: 9
+    color: 'white',
+    fontSize: 9,
   },
   buttonStyle: {
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
-    backgroundColor: "#af3c46",
-    color: "white",
-    textAlign: "center",
-    fontSize: 20
+    backgroundColor: '#af3c46',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20,
   },
   disabledButtonStyle: {
-    backgroundColor: "#614245",
-    color: "#919191"
-  }
+    backgroundColor: '#614245',
+    color: '#919191',
+  },
 });
 
 export default reduxConnect(
@@ -285,13 +280,13 @@ export default reduxConnect(
     logs: state.logs,
     sensorTag: state.activeSensorTag,
     connectionState: state.connectionState,
-    currentTest: state.currentTest
+    currentTest: state.currentTest,
   }),
   {
     clearLogs,
     connect,
     disconnect,
     forgetSensorTag,
-    executeTest
-  }
+    executeTest,
+  },
 )(SensorTag);

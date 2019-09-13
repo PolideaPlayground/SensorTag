@@ -1,52 +1,86 @@
 // @flow
 
-import { put, call } from "redux-saga/effects";
-import { Device, Service, Characteristic } from "react-native-ble-plx";
-import { log, logError } from "./Reducer";
+import {put, call} from 'redux-saga/effects';
+import {
+  Device,
+  Service,
+  Characteristic,
+  Descriptor,
+  BleError,
+  BleErrorCode,
+} from 'react-native-ble-plx';
+import {log, logError} from './Reducer';
 
 export type SensorTagTestMetadata = {
   id: string,
   title: string,
-  execute: (device: Device) => Generator<any, boolean, any>
+  execute: (device: Device) => Generator<any, boolean, any>,
 };
 
-export const SensorTagTests: { [string]: SensorTagTestMetadata } = {
+export const SensorTagTests: {[string]: SensorTagTestMetadata} = {
   READ_ALL_CHARACTERISTICS: {
-    id: "READ_ALL_CHARACTERISTICS",
-    title: "Read all characteristics",
-    execute: readAllCharacteristics
+    id: 'READ_ALL_CHARACTERISTICS',
+    title: 'Read all characteristics',
+    execute: readAllCharacteristics,
   },
   READ_TEMPERATURE: {
-    id: "READ_TEMPERATURE",
-    title: "Read temperature",
-    execute: readTemperature
-  }
+    id: 'READ_TEMPERATURE',
+    title: 'Read temperature',
+    execute: readTemperature,
+  },
 };
 
 function* readAllCharacteristics(device: Device): Generator<*, boolean, *> {
   try {
     const services: Array<Service> = yield call([device, device.services]);
     for (const service of services) {
-      yield put(log("Found service: " + service.uuid));
+      yield put(log('Found service: ' + service.uuid));
       const characteristics: Array<Characteristic> = yield call([
         service,
-        service.characteristics
+        service.characteristics,
       ]);
       for (const characteristic of characteristics) {
-        if (characteristic.uuid === "00002a02-0000-1000-8000-00805f9b34fb")
+        yield put(log('Found characteristic: ' + characteristic.uuid));
+
+        if (characteristic.uuid === '00002a02-0000-1000-8000-00805f9b34fb')
           continue;
 
-        yield put(log("Found characteristic: " + characteristic.uuid));
+        const descriptors: Array<Descriptor> = yield call([
+          characteristic,
+          characteristic.descriptors,
+        ]);
+
+        for (const descriptor of descriptors) {
+          yield put(log('* Found descriptor: ' + descriptor.uuid));
+          const d: Descriptor = yield call([descriptor, descriptor.read]);
+          yield put(log('Descriptor value: ' + (d.value || 'null')));
+          if (d.uuid === '00002902-0000-1000-8000-00805f9b34fb') {
+            yield put(log('Skipping CCC'));
+            continue;
+          }
+          try {
+            yield call([descriptor, descriptor.write], 'AAA=');
+          } catch (error) {
+            const bleError: BleError = error;
+            if (bleError.errorCode === BleErrorCode.DescriptorWriteFailed) {
+              yield put(log('Cannot write to: ' + d.uuid));
+            } else {
+              throw error;
+            }
+          }
+        }
+
+        yield put(log('Found characteristic: ' + characteristic.uuid));
         if (characteristic.isReadable) {
-          yield put(log("Reading value..."));
+          yield put(log('Reading value...'));
           var c = yield call([characteristic, characteristic.read]);
-          yield put(log("Got base64 value: " + c.value));
+          yield put(log('Got base64 value: ' + c.value));
           if (characteristic.isWritableWithResponse) {
             yield call(
               [characteristic, characteristic.writeWithResponse],
-              c.value
+              c.value,
             );
-            yield put(log("Successfully written value back"));
+            yield put(log('Successfully written value back'));
           }
         }
       }
@@ -60,6 +94,6 @@ function* readAllCharacteristics(device: Device): Generator<*, boolean, *> {
 }
 
 function* readTemperature(device: Device): Generator<*, boolean, *> {
-  yield put(log("Read temperature"));
+  yield put(log('Read temperature'));
   return false;
 }

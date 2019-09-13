@@ -1,7 +1,7 @@
 // @flow
 
-import { PermissionsAndroid, Platform } from "react-native";
-import { buffers, eventChannel } from "redux-saga";
+import {PermissionsAndroid, Platform} from 'react-native';
+import {buffers, eventChannel} from 'redux-saga';
 import {
   fork,
   cancel,
@@ -10,8 +10,8 @@ import {
   put,
   race,
   cancelled,
-  actionChannel
-} from "redux-saga/effects";
+  actionChannel,
+} from 'redux-saga/effects';
 import {
   log,
   logError,
@@ -23,17 +23,24 @@ import {
   type ConnectAction,
   type ExecuteTestAction,
   sensorTagFound,
-  ConnectionState
-} from "./Reducer";
-import { BleManager, BleError, Device, State } from "react-native-ble-plx";
-import { SensorTagTests } from "./Tests";
+  ConnectionState,
+} from './Reducer';
+import {
+  BleManager,
+  BleError,
+  Device,
+  State,
+  LogLevel,
+} from 'react-native-ble-plx';
+import {SensorTagTests} from './Tests';
 
 export function* bleSaga(): Generator<*, *, *> {
-  yield put(log("BLE saga started..."));
+  yield put(log('BLE saga started...'));
 
   // First step is to create BleManager which should be used as an entry point
   // to all BLE related functionalities
   const manager = new BleManager();
+  manager.setLogLevel(LogLevel.Verbose);
 
   // All below generators are described below...
   yield fork(handleScanning, manager);
@@ -77,8 +84,8 @@ function* handleScanning(manager: BleManager): Generator<*, *, *> {
     ConnectionState.DISCONNECTED;
 
   const channel = yield actionChannel([
-    "BLE_STATE_UPDATED",
-    "UPDATE_CONNECTION_STATE"
+    'BLE_STATE_UPDATED',
+    'UPDATE_CONNECTION_STATE',
   ]);
 
   for (;;) {
@@ -87,10 +94,10 @@ function* handleScanning(manager: BleManager): Generator<*, *, *> {
       | UpdateConnectionStateAction = yield take(channel);
 
     switch (action.type) {
-      case "BLE_STATE_UPDATED":
+      case 'BLE_STATE_UPDATED':
         bleState = action.state;
         break;
-      case "UPDATE_CONNECTION_STATE":
+      case 'UPDATE_CONNECTION_STATE':
         connectionState = action.state;
         break;
     }
@@ -117,40 +124,40 @@ function* handleScanning(manager: BleManager): Generator<*, *, *> {
 // As long as this generator is working we have enabled scanning functionality.
 // When we detect SensorTag device we make it as an active device.
 function* scan(manager: BleManager): Generator<*, *, *> {
-  if (Platform.OS === "android" && Platform.Version >= 23) {
-    yield put(log("Scanning: Checking permissions..."));
+  if (Platform.OS === 'android' && Platform.Version >= 23) {
+    yield put(log('Scanning: Checking permissions...'));
     const enabled = yield call(
       PermissionsAndroid.check,
-      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
     );
     if (!enabled) {
-      yield put(log("Scanning: Permissions disabled, showing..."));
+      yield put(log('Scanning: Permissions disabled, showing...'));
       const granted = yield call(
         PermissionsAndroid.request,
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
       );
       if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-        yield put(log("Scanning: Permissions not granted, aborting..."));
+        yield put(log('Scanning: Permissions not granted, aborting...'));
         // TODO: Show error message?
         return;
       }
     }
   }
 
-  yield put(log("Scanning started..."));
+  yield put(log('Scanning started...'));
   const scanningChannel = yield eventChannel(emit => {
     manager.startDeviceScan(
       null,
-      { allowDuplicates: true },
+      {allowDuplicates: true},
       (error, scannedDevice) => {
         if (error) {
           emit([error, scannedDevice]);
           return;
         }
-        if (scannedDevice != null && scannedDevice.localName === "SensorTag") {
+        if (scannedDevice != null && scannedDevice.localName === 'SensorTag') {
           emit([error, scannedDevice]);
         }
-      }
+      },
     );
     return () => {
       manager.stopDeviceScan();
@@ -160,7 +167,7 @@ function* scan(manager: BleManager): Generator<*, *, *> {
   try {
     for (;;) {
       const [error, scannedDevice]: [?BleError, ?Device] = yield take(
-        scanningChannel
+        scanningChannel,
       );
       if (error != null) {
       }
@@ -170,7 +177,7 @@ function* scan(manager: BleManager): Generator<*, *, *> {
     }
   } catch (error) {
   } finally {
-    yield put(log("Scanning stopped..."));
+    yield put(log('Scanning stopped...'));
     if (yield cancelled()) {
       scanningChannel.close();
     }
@@ -182,11 +189,11 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
 
   for (;;) {
     // Take action
-    const { device }: ConnectAction = yield take("CONNECT");
+    const {device}: ConnectAction = yield take('CONNECT');
 
     const disconnectedChannel = yield eventChannel(emit => {
       const subscription = device.onDisconnected(error => {
-        emit({ type: "DISCONNECTED", error: error });
+        emit({type: 'DISCONNECTED', error: error});
       });
       return () => {
         subscription.remove();
@@ -194,8 +201,8 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
     }, buffers.expanding(1));
 
     const deviceActionChannel = yield actionChannel([
-      "DISCONNECT",
-      "EXECUTE_TEST"
+      'DISCONNECT',
+      'EXECUTE_TEST',
     ]);
 
     try {
@@ -206,26 +213,26 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
       yield put(updateConnectionState(ConnectionState.CONNECTED));
 
       for (;;) {
-        const { deviceAction, disconnected } = yield race({
+        const {deviceAction, disconnected} = yield race({
           deviceAction: take(deviceActionChannel),
-          disconnected: take(disconnectedChannel)
+          disconnected: take(disconnectedChannel),
         });
 
         if (deviceAction) {
-          if (deviceAction.type === "DISCONNECT") {
-            yield put(log("Disconnected by user..."));
+          if (deviceAction.type === 'DISCONNECT') {
+            yield put(log('Disconnected by user...'));
             yield put(updateConnectionState(ConnectionState.DISCONNECTING));
             yield call([device, device.cancelConnection]);
             break;
           }
-          if (deviceAction.type === "EXECUTE_TEST") {
+          if (deviceAction.type === 'EXECUTE_TEST') {
             if (testTask != null) {
               yield cancel(testTask);
             }
             testTask = yield fork(executeTest, device, deviceAction);
           }
         } else if (disconnected) {
-          yield put(log("Disconnected by device..."));
+          yield put(log('Disconnected by device...'));
           if (disconnected.error != null) {
             yield put(logError(disconnected.error));
           }
@@ -244,17 +251,17 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
 
 function* executeTest(
   device: Device,
-  test: ExecuteTestAction
+  test: ExecuteTestAction,
 ): Generator<*, *, *> {
-  yield put(log("Executing test: " + test.id));
+  yield put(log('Executing test: ' + test.id));
   const start = Date.now();
   const result = yield call(SensorTagTests[test.id].execute, device);
   if (result) {
     yield put(
-      log("Test finished successfully! (" + (Date.now() - start) + " ms)")
+      log('Test finished successfully! (' + (Date.now() - start) + ' ms)'),
     );
   } else {
-    yield put(log("Test failed! (" + (Date.now() - start) + " ms)"));
+    yield put(log('Test failed! (' + (Date.now() - start) + ' ms)'));
   }
   yield put(testFinished());
 }

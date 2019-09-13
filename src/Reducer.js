@@ -1,6 +1,6 @@
 // @flow
 
-import { State, Device, BleError } from "react-native-ble-plx";
+import {State, Device, BleError} from 'react-native-ble-plx';
 
 export type Action =
   | LogAction
@@ -15,49 +15,49 @@ export type Action =
   | TestFinishedAction;
 
 export type LogAction = {|
-  type: "LOG",
-  message: string
+  type: 'LOG',
+  message: string,
 |};
 
 export type ClearLogsAction = {|
-  type: "CLEAR_LOGS"
+  type: 'CLEAR_LOGS',
 |};
 
 export type ConnectAction = {|
-  type: "CONNECT",
-  device: Device
+  type: 'CONNECT',
+  device: Device,
 |};
 
 export type DisconnectAction = {|
-  type: "DISCONNECT"
+  type: 'DISCONNECT',
 |};
 
 export type UpdateConnectionStateAction = {|
-  type: "UPDATE_CONNECTION_STATE",
-  state: $Keys<typeof ConnectionState>
+  type: 'UPDATE_CONNECTION_STATE',
+  state: $Keys<typeof ConnectionState>,
 |};
 
 export type BleStateUpdatedAction = {|
-  type: "BLE_STATE_UPDATED",
-  state: $Keys<typeof State>
+  type: 'BLE_STATE_UPDATED',
+  state: $Keys<typeof State>,
 |};
 
 export type SensorTagFoundAction = {|
-  type: "SENSOR_TAG_FOUND",
-  device: Device
+  type: 'SENSOR_TAG_FOUND',
+  device: Device,
 |};
 
 export type ForgetSensorTagAction = {|
-  type: "FORGET_SENSOR_TAG"
+  type: 'FORGET_SENSOR_TAG',
 |};
 
 export type ExecuteTestAction = {|
-  type: "EXECUTE_TEST",
-  id: string
+  type: 'EXECUTE_TEST',
+  id: string,
 |};
 
 export type TestFinishedAction = {|
-  type: "TEST_FINISHED"
+  type: 'TEST_FINISHED',
 |};
 
 export type ReduxState = {
@@ -66,15 +66,15 @@ export type ReduxState = {
   activeSensorTag: ?Device,
   connectionState: $Keys<typeof ConnectionState>,
   currentTest: ?string,
-  bleState: $Keys<typeof State>
+  bleState: $Keys<typeof State>,
 };
 
 export const ConnectionState = {
-  DISCONNECTED: "DISCONNECTED",
-  CONNECTING: "CONNECTING",
-  DISCOVERING: "DISCOVERING",
-  CONNECTED: "CONNECTED",
-  DISCONNECTING: "DISCONNECTING"
+  DISCONNECTED: 'DISCONNECTED',
+  CONNECTING: 'CONNECTING',
+  DISCOVERING: 'DISCOVERING',
+  CONNECTED: 'CONNECTED',
+  DISCONNECTING: 'DISCONNECTING',
 };
 
 export const initialState: ReduxState = {
@@ -83,132 +83,134 @@ export const initialState: ReduxState = {
   activeSensorTag: null,
   connectionState: ConnectionState.DISCONNECTED,
   currentTest: null,
-  logs: []
+  logs: [],
 };
 
 export function log(message: string): LogAction {
   return {
-    type: "LOG",
-    message
+    type: 'LOG',
+    message,
   };
 }
 
 export function logError(error: BleError) {
   return log(
-    "ERROR: " +
+    'ERROR: ' +
       error.message +
-      ", ATT: " +
-      (error.attErrorCode || "null") +
-      ", iOS: " +
-      (error.iosErrorCode || "null") +
-      ", android: " +
-      (error.androidErrorCode || "null")
+      ', ATT: ' +
+      (error.attErrorCode || 'null') +
+      ', iOS: ' +
+      (error.iosErrorCode || 'null') +
+      ', android: ' +
+      (error.androidErrorCode || 'null') +
+      ', reason: ' +
+      (error.reason || 'null'),
   );
 }
 
 export function clearLogs(): ClearLogsAction {
   return {
-    type: "CLEAR_LOGS"
+    type: 'CLEAR_LOGS',
   };
 }
 
 export function connect(device: Device): ConnectAction {
   return {
-    type: "CONNECT",
-    device
+    type: 'CONNECT',
+    device,
   };
 }
 
 export function updateConnectionState(
-  state: $Keys<typeof ConnectionState>
+  state: $Keys<typeof ConnectionState>,
 ): UpdateConnectionStateAction {
   return {
-    type: "UPDATE_CONNECTION_STATE",
-    state
+    type: 'UPDATE_CONNECTION_STATE',
+    state,
   };
 }
 
 export function disconnect(): DisconnectAction {
   return {
-    type: "DISCONNECT"
+    type: 'DISCONNECT',
   };
 }
 
 export function bleStateUpdated(
-  state: $Keys<typeof State>
+  state: $Keys<typeof State>,
 ): BleStateUpdatedAction {
   return {
-    type: "BLE_STATE_UPDATED",
-    state
+    type: 'BLE_STATE_UPDATED',
+    state,
   };
 }
 
 export function sensorTagFound(device: Device): SensorTagFoundAction {
   return {
-    type: "SENSOR_TAG_FOUND",
-    device
+    type: 'SENSOR_TAG_FOUND',
+    device,
   };
 }
 
 export function forgetSensorTag(): ForgetSensorTagAction {
   return {
-    type: "FORGET_SENSOR_TAG"
+    type: 'FORGET_SENSOR_TAG',
   };
 }
 
 export function executeTest(id: string): ExecuteTestAction {
   return {
-    type: "EXECUTE_TEST",
-    id
+    type: 'EXECUTE_TEST',
+    id,
   };
 }
 
 export function testFinished(): TestFinishedAction {
   return {
-    type: "TEST_FINISHED"
+    type: 'TEST_FINISHED',
   };
 }
 
 export function reducer(
   state: ReduxState = initialState,
-  action: Action
+  action: Action,
 ): ReduxState {
   switch (action.type) {
-    case "LOG":
-      return { ...state, logs: [action.message, ...state.logs] };
-    case "CLEAR_LOGS":
-      return { ...state, logs: [] };
-    case "UPDATE_CONNECTION_STATE":
+    case 'LOG':
+      return {...state, logs: [action.message, ...state.logs]};
+    case 'CLEAR_LOGS':
+      return {...state, logs: []};
+    case 'UPDATE_CONNECTION_STATE':
       return {
         ...state,
         connectionState: action.state,
-        logs: ["Connection state changed: " + action.state, ...state.logs]
+        logs: ['Connection state changed: ' + action.state, ...state.logs],
       };
-    case "BLE_STATE_UPDATED":
+    case 'BLE_STATE_UPDATED':
       return {
         ...state,
         bleState: action.state,
-        logs: ["BLE state changed: " + action.state, ...state.logs]
+        logs: ['BLE state changed: ' + action.state, ...state.logs],
       };
-    case "SENSOR_TAG_FOUND":
+    case 'SENSOR_TAG_FOUND':
       if (state.activeSensorTag) return state;
       return {
         ...state,
         activeSensorTag: action.device,
-        logs: ["SensorTag found: " + action.device.id, ...state.logs]
+        logs: ['SensorTag found: ' + action.device.id, ...state.logs],
       };
-    case "FORGET_SENSOR_TAG":
+    case 'FORGET_SENSOR_TAG':
       return {
         ...state,
-        activeSensorTag: null
+        activeSensorTag: null,
       };
-    case "EXECUTE_TEST":
+    case 'EXECUTE_TEST':
       if (state.connectionState !== ConnectionState.CONNECTED) {
         return state;
       }
-      return { ...state, currentTest: action.id };
-    case "TEST_FINISHED":
-      return { ...state, currentTest: null };
+      return {...state, currentTest: action.id};
+    case 'TEST_FINISHED':
+      return {...state, currentTest: null};
     default:
       return state;
   }

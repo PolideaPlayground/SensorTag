@@ -11,15 +11,15 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		24A0803D11B705AD5347E6E4 /* libPods-SensorTag.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 401F3665B7C30EE4DD07764B /* libPods-SensorTag.a */; };
-		87D6162322DC6A57003201A7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D6162222DC6A57003201A7 /* File.swift */; };
+		8732EAB8232BA02D004EDE93 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732EAB7232BA02D004EDE93 /* File.swift */; };
+		AC3253E5C4B8037CCA0DF096 /* libPods-SensorTag.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C6A41F0222444F294FC8BD /* libPods-SensorTag.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SensorTagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorTagTests.m; sourceTree = "<group>"; };
-		040835A899606130DE4A7C8C /* libPods-SensorTagTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorTagTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CDF96881BE31EF97D842420 /* Pods-SensorTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag.release.xcconfig"; path = "Target Support Files/Pods-SensorTag/Pods-SensorTag.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SensorTag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SensorTag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SensorTag/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SensorTag/AppDelegate.m; sourceTree = "<group>"; };
@@ -27,19 +27,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SensorTag/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SensorTag/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SensorTag/main.m; sourceTree = "<group>"; };
-		1B37785E07C0B036CE889002 /* libPods-SensorTag-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorTag-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		31BF07D15735E58BAE0FB582 /* Pods-SensorTag-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SensorTag-tvOS/Pods-SensorTag-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		401F3665B7C30EE4DD07764B /* libPods-SensorTag.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorTag.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		495C1DB175BD147AB78D1718 /* Pods-SensorTag-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SensorTag-tvOS/Pods-SensorTag-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		4C674051975110C0250BE355 /* Pods-SensorTagTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTagTests.release.xcconfig"; path = "Target Support Files/Pods-SensorTagTests/Pods-SensorTagTests.release.xcconfig"; sourceTree = "<group>"; };
-		5A8EC362E4F57E3ED892C499 /* Pods-SensorTag.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag.debug.xcconfig"; path = "Target Support Files/Pods-SensorTag/Pods-SensorTag.debug.xcconfig"; sourceTree = "<group>"; };
-		7F0ADE012C42DC722A533012 /* Pods-SensorTag-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SensorTag-tvOSTests/Pods-SensorTag-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		87D6162122DC6A57003201A7 /* SensorTag-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SensorTag-Bridging-Header.h"; sourceTree = "<group>"; };
-		87D6162222DC6A57003201A7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		A084E12165C15C0BCB13ED63 /* Pods-SensorTag.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag.release.xcconfig"; path = "Target Support Files/Pods-SensorTag/Pods-SensorTag.release.xcconfig"; sourceTree = "<group>"; };
-		CC232A8E1FFE444806D5A705 /* Pods-SensorTag-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SensorTag-tvOSTests/Pods-SensorTag-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		D00784C117E3FF57FFBE3C22 /* Pods-SensorTagTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTagTests.debug.xcconfig"; path = "Target Support Files/Pods-SensorTagTests/Pods-SensorTagTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D57FC7E5C06E4FC7C7DB1C53 /* libPods-SensorTag-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorTag-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8732EAB6232BA02D004EDE93 /* SensorTag-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SensorTag-Bridging-Header.h"; sourceTree = "<group>"; };
+		8732EAB7232BA02D004EDE93 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		92C6A41F0222444F294FC8BD /* libPods-SensorTag.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorTag.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C73CEE9A55FB98ABF221EA8B /* Pods-SensorTag.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorTag.debug.xcconfig"; path = "Target Support Files/Pods-SensorTag/Pods-SensorTag.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -49,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A0803D11B705AD5347E6E4 /* libPods-SensorTag.a in Frameworks */,
+				AC3253E5C4B8037CCA0DF096 /* libPods-SensorTag.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,8 +74,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				87D6162222DC6A57003201A7 /* File.swift */,
-				87D6162122DC6A57003201A7 /* SensorTag-Bridging-Header.h */,
 			);
 			name = SensorTag;
 			sourceTree = "<group>";
@@ -94,12 +83,18 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				401F3665B7C30EE4DD07764B /* libPods-SensorTag.a */,
-				1B37785E07C0B036CE889002 /* libPods-SensorTag-tvOS.a */,
-				D57FC7E5C06E4FC7C7DB1C53 /* libPods-SensorTag-tvOSTests.a */,
-				040835A899606130DE4A7C8C /* libPods-SensorTagTests.a */,
+				92C6A41F0222444F294FC8BD /* libPods-SensorTag.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		40EEDA3C2D4FB34C5278B0CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C73CEE9A55FB98ABF221EA8B /* Pods-SensorTag.debug.xcconfig */,
+				0CDF96881BE31EF97D842420 /* Pods-SensorTag.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -112,12 +107,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8732EAB7232BA02D004EDE93 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* SensorTag */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SensorTagTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				A3254DA79563F60645FE7965 /* Pods */,
+				40EEDA3C2D4FB34C5278B0CE /* Pods */,
+				8732EAB6232BA02D004EDE93 /* SensorTag-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -132,21 +129,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A3254DA79563F60645FE7965 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5A8EC362E4F57E3ED892C499 /* Pods-SensorTag.debug.xcconfig */,
-				A084E12165C15C0BCB13ED63 /* Pods-SensorTag.release.xcconfig */,
-				495C1DB175BD147AB78D1718 /* Pods-SensorTag-tvOS.debug.xcconfig */,
-				31BF07D15735E58BAE0FB582 /* Pods-SensorTag-tvOS.release.xcconfig */,
-				7F0ADE012C42DC722A533012 /* Pods-SensorTag-tvOSTests.debug.xcconfig */,
-				CC232A8E1FFE444806D5A705 /* Pods-SensorTag-tvOSTests.release.xcconfig */,
-				D00784C117E3FF57FFBE3C22 /* Pods-SensorTagTests.debug.xcconfig */,
-				4C674051975110C0250BE355 /* Pods-SensorTagTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -154,7 +136,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SensorTag" */;
 			buildPhases = (
-				26185DC303D2CBC209D79C0C /* [CP] Check Pods Manifest.lock */,
+				6316F558EA8691DE886558D2 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -181,8 +163,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = RB45UJ7QKH;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -232,7 +213,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		26185DC303D2CBC209D79C0C /* [CP] Check Pods Manifest.lock */ = {
+		6316F558EA8691DE886558D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -281,7 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				87D6162322DC6A57003201A7 /* File.swift in Sources */,
+				8732EAB8232BA02D004EDE93 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,12 +284,10 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A8EC362E4F57E3ED892C499 /* Pods-SensorTag.debug.xcconfig */;
+			baseConfigurationReference = C73CEE9A55FB98ABF221EA8B /* Pods-SensorTag.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = RB45UJ7QKH;
@@ -319,9 +298,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60.05;
 				PRODUCT_NAME = SensorTag;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -331,12 +309,10 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A084E12165C15C0BCB13ED63 /* Pods-SensorTag.release.xcconfig */;
+			baseConfigurationReference = 0CDF96881BE31EF97D842420 /* Pods-SensorTag.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RB45UJ7QKH;
 				INFOPLIST_FILE = SensorTag/Info.plist;
@@ -346,9 +322,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60.05;
 				PRODUCT_NAME = SensorTag;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
