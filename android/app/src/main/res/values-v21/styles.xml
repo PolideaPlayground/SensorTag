@@ -1,12 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="sensorTag">#2923fb</color>
-    <color name="sensorTagDark">#15127e</color>
-
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/sensorTag</item>
+        <item name="android:colorPrimary">@color/sensorTag</item>
+        <item name="android:colorPrimaryDark">@color/sensorTagDark</item>
     </style>
-
 </resources>

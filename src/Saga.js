@@ -51,8 +51,8 @@ export function* bleSaga(): Generator<*, *, *> {
 // This generator tracks our BLE state. Based on that we can enable scanning, get rid of devices etc.
 // eventChannel allows us to wrap callback based API which can be then conveniently used in sagas.
 function* handleBleState(manager: BleManager): Generator<*, *, *> {
-  const stateChannel = yield eventChannel(emit => {
-    const subscription = manager.onStateChange(state => {
+  const stateChannel = yield eventChannel((emit) => {
+    const subscription = manager.onStateChange((state) => {
       emit(state);
     }, true);
     return () => {
@@ -145,7 +145,7 @@ function* scan(manager: BleManager): Generator<*, *, *> {
   }
 
   yield put(log('Scanning started...'));
-  const scanningChannel = yield eventChannel(emit => {
+  const scanningChannel = yield eventChannel((emit) => {
     manager.startDeviceScan(
       null,
       {allowDuplicates: true},
@@ -191,8 +191,8 @@ function* handleConnection(manager: BleManager): Generator<*, *, *> {
     // Take action
     const {device}: ConnectAction = yield take('CONNECT');
 
-    const disconnectedChannel = yield eventChannel(emit => {
-      const subscription = device.onDisconnected(error => {
+    const disconnectedChannel = yield eventChannel((emit) => {
+      const subscription = device.onDisconnected((error) => {
         emit({type: 'DISCONNECTED', error: error});
       });
       return () => {

@@ -24,7 +24,7 @@ import {
 import {Device} from 'react-native-ble-plx';
 import {SensorTagTests, type SensorTagTestMetadata} from './Tests';
 
-const Button = function(props) {
+const Button = function (props) {
   const {onPress, title, ...restProps} = props;
   return (
     <TouchableOpacity onPress={onPress} {...restProps}>
@@ -190,7 +190,7 @@ class SensorTag extends Component<Props, State> {
           }}>
           <View
             style={{
-              backgroundColor: '#a92a35',
+              backgroundColor: '#2a24fb',
               borderRadius: 10,
               height: '50%',
               padding: 5,
@@ -237,7 +237,7 @@ class SensorTag extends Component<Props, State> {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#5a070f" />
+        <StatusBar barStyle="light-content" backgroundColor="#15127e" />
         {this.renderHeader()}
         {this.renderLogs()}
         {this.renderModal()}
@@ -249,7 +249,7 @@ class SensorTag extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#a92a35',
+    backgroundColor: '#2924fb',
     padding: 5,
   },
   textStyle: {
@@ -264,13 +264,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
-    backgroundColor: '#af3c46',
+    backgroundColor: '#15127e',
     color: 'white',
     textAlign: 'center',
     fontSize: 20,
   },
   disabledButtonStyle: {
-    backgroundColor: '#614245',
+    backgroundColor: '#15142d',
     color: '#919191',
   },
 });

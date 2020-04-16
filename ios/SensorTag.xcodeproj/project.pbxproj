@@ -162,7 +162,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = RB45UJ7QKH;
+						DevelopmentTeam = 5KDPRP7T4V;
 						LastSwiftMigration = 1100;
 					};
 				};
@@ -290,7 +290,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = RB45UJ7QKH;
+				DEVELOPMENT_TEAM = 5KDPRP7T4V;
 				INFOPLIST_FILE = SensorTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -298,7 +298,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60.05;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag61;
 				PRODUCT_NAME = SensorTag;
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -314,7 +314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = RB45UJ7QKH;
+				DEVELOPMENT_TEAM = 5KDPRP7T4V;
 				INFOPLIST_FILE = SensorTag/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -322,7 +322,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag60.05;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.SensorTag61;
 				PRODUCT_NAME = SensorTag;
 				SWIFT_OBJC_BRIDGING_HEADER = "SensorTag-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
